@@ -13,17 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for JRE repositories keyed by vendor
-# To go back to Java 7, permgen should be used instead of metaspace.  Please see the documentation for more detail.
+# Configuration for the Spring Auto Reconfiguration framework.
+# Note that the repository is shared with the Play Auto Reconfiguration framework and should be kept in step to
+# avoid conflicts.
 ---
-repository_root: "{default.repository.root}/openjdk/{platform}/{architecture}"
-version: 1.8.0_+
-memory_sizes:
-  metaspace: 64m..
-  # permgen: 64m..
-memory_heuristics:
-  heap: 85
-  metaspace: 10
-  # permgen: 10
-  stack: 5
-  native: 10
+version: 1.+
+repository_root: "{default.repository.root}/auto-reconfiguration"
+enabled: true

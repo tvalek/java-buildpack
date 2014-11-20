@@ -1,5 +1,6 @@
+# Encoding: utf-8
 # Cloud Foundry Java Buildpack
-# Copyright (c) 2013 the original author or authors.
+# Copyright 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for JRE repositories keyed by vendor
-# To go back to Java 7, permgen should be used instead of metaspace.  Please see the documentation for more detail.
----
-repository_root: "{default.repository.root}/openjdk/{platform}/{architecture}"
-version: 1.8.0_+
-memory_sizes:
-  metaspace: 64m..
-  # permgen: 64m..
-memory_heuristics:
-  heap: 85
-  metaspace: 10
-  # permgen: 10
-  stack: 5
-  native: 10
+require 'java_buildpack'
+
+module JavaBuildpack
+
+  # A module encapsulating all of the container components for the Java buildpack
+  module Container
+  end
+
+end

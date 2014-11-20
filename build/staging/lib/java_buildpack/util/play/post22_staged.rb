@@ -1,3 +1,4 @@
+# Encoding: utf-8
 # Cloud Foundry Java Buildpack
 # Copyright (c) 2013 the original author or authors.
 #
@@ -13,17 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for JRE repositories keyed by vendor
-# To go back to Java 7, permgen should be used instead of metaspace.  Please see the documentation for more detail.
----
-repository_root: "{default.repository.root}/openjdk/{platform}/{architecture}"
-version: 1.8.0_+
-memory_sizes:
-  metaspace: 64m..
-  # permgen: 64m..
-memory_heuristics:
-  heap: 85
-  metaspace: 10
-  # permgen: 10
-  stack: 5
-  native: 10
+require 'java_buildpack/util/play/post22'
+
+module JavaBuildpack
+  module Util
+    module Play
+
+      # Encapsulate inspection and modification of Play staged applications from Play 2.2.0 onwards.
+      class Post22Staged < Post22
+
+        protected
+
+        # (see JavaBuildpack::Util::Play::Post22#root)
+        def root
+          @droplet.root
+        end
+
+      end
+
+    end
+  end
+end

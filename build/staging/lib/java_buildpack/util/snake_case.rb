@@ -1,5 +1,6 @@
+# Encoding: utf-8
 # Cloud Foundry Java Buildpack
-# Copyright (c) 2013 the original author or authors.
+# Copyright 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Configuration for JRE repositories keyed by vendor
-# To go back to Java 7, permgen should be used instead of metaspace.  Please see the documentation for more detail.
----
-repository_root: "{default.repository.root}/openjdk/{platform}/{architecture}"
-version: 1.8.0_+
-memory_sizes:
-  metaspace: 64m..
-  # permgen: 64m..
-memory_heuristics:
-  heap: 85
-  metaspace: 10
-  # permgen: 10
-  stack: 5
-  native: 10
+# A mixin that adds the ability to turn a +String+ into snake case
+class String
+
+  # Converts a string to snake case.  For example, the Spring +SnakeCase+ would become +snake_case+.
+  #
+  # @return [String] The snake case rendering of this +String+
+  def snake_case
+    gsub(/::/, '/')
+    .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+    .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+    .tr('-', '_')
+    .downcase
+  end
+
+end
